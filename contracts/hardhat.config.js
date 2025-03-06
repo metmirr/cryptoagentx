@@ -18,23 +18,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 const AGENT_ADDRESS = process.env.AGENT_ADDRESS;
-const AGENT_BUDGET_CONTRACT_ADDRESS = process.env.AGENT_BUDGET_CONTRACT_ADDRESS;
-
-task("setbudget", "Sets the budget for the agent", async (taskArgs, hre) => {
-  const [owner] = await hre.ethers.getSigners();
-  const budget = hre.ethers.parseUnits("1000", 6); // 1000 USDC
-
-  const AgentBudget = await hre.ethers.getContractFactory("AgentBudget");
-  const contract = AgentBudget.attach(AGENT_BUDGET_CONTRACT_ADDRESS).connect(owner);
-
-  const tx = await contract.setBudget(AGENT_BUDGET_CONTRACT_ADDRESS, budget);
-  await tx.wait();
-  console.log(tx);
-
-
-  console.log(`Budget set for ${AGENT_ADDRESS}: 1000 USDC`);
-});
-
 const MOCK_USDC_ADDRESS = process.env.MOCK_USDC_ADDRESS;
 
 task("fund-agent", "Funds the agent", async (taskArgs, hre) => {
@@ -44,7 +27,7 @@ task("fund-agent", "Funds the agent", async (taskArgs, hre) => {
   const usdc = await hre.ethers.getContractAt("MockUSDC", MOCK_USDC_ADDRESS, owner);
   const tx = await usdc.transfer(AGENT_ADDRESS, amount);
   await tx.wait();
-  console.log(`Transferred 1000 USDC to ${AGENT_ADDRESS}`);
+  console.log(`Transferred ${amount} USDC to ${AGENT_ADDRESS}`);
 });
 
 /** @type import('hardhat/config').HardhatUserConfig */
