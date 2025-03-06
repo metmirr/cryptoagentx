@@ -1,0 +1,11 @@
+node_modules
+.vscode
+.env
+artifacts
+cache
+coverage
+dist
+.env.local
+.env.development.local
+.env.test.local
+ignite/deployments
