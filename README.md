@@ -21,6 +21,7 @@ node dist/agent.js
 ## Project Structure
 
 contracts/ # Smart contracts
+
 src/ # TypeScript backend service and agent integration
 
 ## Usage
